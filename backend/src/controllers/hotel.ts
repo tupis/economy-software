@@ -11,9 +11,6 @@ export const HotelController = {
   },
   search: async (req: req, res: res) => {
     const { id } = req.params;
-    if (id === undefined || id === null) {
-      throw new Error("Por favor insira um hotel válido");
-    }
 
     try {
       const findHotel = await prisma.tb_hotel.findUnique({
@@ -21,6 +18,10 @@ export const HotelController = {
           id: Number(id),
         },
       });
+
+      if (findHotel === null) {
+        throw new Error();
+      }
 
       res.send(findHotel);
     } catch (error) {
@@ -42,9 +43,6 @@ export const HotelController = {
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
-    if (id === undefined || id === null) {
-      throw new Error("Por favor insira um hotel válido");
-    }
 
     try {
       const updateHotel = await prisma.tb_hotel.update({
@@ -56,6 +54,10 @@ export const HotelController = {
           ...req.body,
         },
       });
+
+      if (updateHotel === null) {
+        throw new Error();
+      }
 
       res.send(updateHotel);
     } catch (error) {
