@@ -33,6 +33,8 @@ model tb_reservas {
 
 model tb_hospedes {
   id            Int          @id @default(autoincrement())
+  nome          String
+  sobrenome     String
   tb_reservas   tb_reservas? @relation(fields: [tb_reservasId], references: [id])
   tb_reservasId Int?
 }
