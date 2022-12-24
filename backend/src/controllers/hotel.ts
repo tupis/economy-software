@@ -7,7 +7,9 @@ export const HotelController = {
       const allHotels = await prisma.tb_hotel.findMany();
 
       res.send(allHotels);
-    } catch (error) {}
+    } catch (error) {
+      res.send("Erro ao listar todos os hotéis");
+    }
   },
   search: async (req: req, res: res) => {
     const { id } = req.params;
