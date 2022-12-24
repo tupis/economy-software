@@ -9,7 +9,7 @@ export const ReservaController = {
       res.send(allHotels);
     } catch (error) {}
   },
-  list: async (req: req, res: res) => {
+  search: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
       return;

@@ -6,6 +6,6 @@ const ReservaRouter = express.Router();
 ReservaRouter.post("/cadastrarReservaHospede", ReservaController.create);
 ReservaRouter.put("/atualizarReservaHospede", ReservaController.update);
 ReservaRouter.get("/buscarReservaHospede", ReservaController.listAll);
-ReservaRouter.get("/buscarReservaHospede/:id", ReservaController.list);
+ReservaRouter.get("/buscarReservaHospede/:id", ReservaController.search);
 
 export default ReservaRouter;
