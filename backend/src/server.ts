@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-const port = 5000 || Number(process.env.PORT);
+const port = Number(process.env.PORT) || 5000;
 app.use(router);
 
-app.listen(port, () => console.log("server online at port" + port));
+app.listen(port, () => console.log("server online at port " + port));
