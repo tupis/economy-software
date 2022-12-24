@@ -12,7 +12,7 @@ export const HospedeController = {
   search: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira um hospede válido");
     }
 
     try {
@@ -43,7 +43,7 @@ export const HospedeController = {
   update: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira um hospede válido");
     }
 
     try {

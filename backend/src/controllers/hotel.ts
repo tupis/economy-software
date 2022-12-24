@@ -12,7 +12,7 @@ export const HotelController = {
   search: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira um hotel válido");
     }
 
     try {
@@ -43,7 +43,7 @@ export const HotelController = {
   update: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira um hotel válido");
     }
 
     try {

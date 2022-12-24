@@ -12,7 +12,7 @@ export const ReservaController = {
   search: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira uma reserva válida");
     }
 
     try {
@@ -43,7 +43,7 @@ export const ReservaController = {
   update: async (req: req, res: res) => {
     const { id } = req.params;
     if (id === undefined || id === null) {
-      return;
+      throw new Error("Por favor insira uma reserva válida");
     }
 
     try {
