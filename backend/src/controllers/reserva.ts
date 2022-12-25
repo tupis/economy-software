@@ -62,6 +62,9 @@ export const ReservaController = {
             },
           },
         },
+        include: {
+          hospedes: true,
+        },
       });
 
       res.send(newReserva);
@@ -75,13 +78,28 @@ export const ReservaController = {
       apartamento,
       datacheckin,
       datacheckout,
-      hospedes,
       idhotel,
       numeroreserva,
       status,
     } = req.body;
 
-    //FIXME: map each hospede to update
+    let hospedes: Array<any> = [];
+
+    for await (let hospede of req.body.hospedes) {
+      hospedes.push({
+        where: {
+          id: hospede.idhospede,
+        },
+        create: {
+          nome: hospede.nome,
+          sobrenome: hospede.sobrenome,
+        },
+        update: {
+          nome: hospede.nome,
+          sobrenome: hospede.sobrenome,
+        },
+      });
+    }
     try {
       const updateReserva = await prisma.tb_reservas.update({
         where: {
@@ -96,19 +114,7 @@ export const ReservaController = {
           numeroreserva,
           status,
           hospedes: {
-            upsert: {
-              where: {
-                id: hospedes[0].idhospede,
-              },
-              create: {
-                nome: hospedes[0].nome,
-                sobrenome: hospedes[0].sobrenome,
-              },
-              update: {
-                nome: hospedes[0].nome,
-                sobrenome: hospedes[0].sobrenome,
-              },
-            },
+            upsert: hospedes,
           },
         },
       });
