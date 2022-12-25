@@ -38,11 +38,15 @@ export const ReservaController = {
       numeroreserva,
       status,
       datacheckout,
-      hospedes,
       idhotel,
     } = req.body;
 
-    //FIXME: adjust hospede create
+    let hospedes: Array<any> = [];
+
+    for await (let hospede of req.body.hospedes) {
+      hospedes.push({ nome: hospede.nome, sobrenome: hospede.sobrenome });
+    }
+
     try {
       const newReserva = await prisma.tb_reservas.create({
         data: {
@@ -54,9 +58,7 @@ export const ReservaController = {
           status,
           hospedes: {
             createMany: {
-              data: {
-                ...hospedes,
-              },
+              data: hospedes,
             },
           },
         },
