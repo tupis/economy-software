@@ -19,6 +19,9 @@ export const HotelController = {
         where: {
           id: Number(id),
         },
+        include: {
+          reservas: true,
+        },
       });
 
       if (findHotel === null) {
@@ -31,10 +34,17 @@ export const HotelController = {
     }
   },
   create: async (req: req, res: res) => {
+    const { cidade, cnpj, estado, nome, pais, reservas } = req.body;
+
     try {
       const newHotel = await prisma.tb_hotel.create({
         data: {
-          ...req.body,
+          cidade,
+          cnpj,
+          estado,
+          nome,
+          pais,
+          reservas,
         },
       });
 
@@ -45,6 +55,7 @@ export const HotelController = {
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
+    const { cidade, cnpj, estado, nome, pais, reservas } = req.body;
 
     try {
       const updateHotel = await prisma.tb_hotel.update({
@@ -53,7 +64,12 @@ export const HotelController = {
         },
 
         data: {
-          ...req.body,
+          cidade,
+          cnpj,
+          estado,
+          nome,
+          pais,
+          reservas,
         },
       });
 
