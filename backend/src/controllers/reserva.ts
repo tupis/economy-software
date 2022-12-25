@@ -17,6 +17,9 @@ export const ReservaController = {
         where: {
           id: Number(id),
         },
+        include: {
+          hospedes: true,
+        },
       });
 
       if (findReserva === null) {
@@ -29,10 +32,33 @@ export const ReservaController = {
     }
   },
   create: async (req: req, res: res) => {
+    const {
+      apartamento,
+      datacheckin,
+      numeroreserva,
+      status,
+      datacheckout,
+      hospedes,
+      idhotel,
+    } = req.body;
+
+    //FIXME: adjust hospede create
     try {
       const newReserva = await prisma.tb_reservas.create({
         data: {
-          ...req.body,
+          idhotel,
+          numeroreserva,
+          apartamento,
+          datacheckin,
+          datacheckout,
+          status,
+          hospedes: {
+            createMany: {
+              data: {
+                ...hospedes,
+              },
+            },
+          },
         },
       });
 
@@ -43,7 +69,17 @@ export const ReservaController = {
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
+    const {
+      apartamento,
+      datacheckin,
+      datacheckout,
+      hospedes,
+      idhotel,
+      numeroreserva,
+      status,
+    } = req.body;
 
+    //FIXME: map each hospede to update
     try {
       const updateReserva = await prisma.tb_reservas.update({
         where: {
@@ -51,7 +87,27 @@ export const ReservaController = {
         },
 
         data: {
-          ...req.body,
+          apartamento,
+          datacheckin,
+          datacheckout,
+          idhotel,
+          numeroreserva,
+          status,
+          hospedes: {
+            upsert: {
+              where: {
+                id: hospedes[0].idhospede,
+              },
+              create: {
+                nome: hospedes[0].nome,
+                sobrenome: hospedes[0].sobrenome,
+              },
+              update: {
+                nome: hospedes[0].nome,
+                sobrenome: hospedes[0].sobrenome,
+              },
+            },
+          },
         },
       });
 
