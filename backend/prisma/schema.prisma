@@ -19,12 +19,12 @@ model tb_hotel {
 }
 
 model tb_reservas {
-  id            Int       @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   idhotel       Int?
   numeroreserva String
   apartamento   String
-  datacheckin   DateTime
-  datacheckout  DateTime?
+  datacheckin   String
+  datacheckout  String?
   status        Int
 
   hospedes tb_hospedes[]
