@@ -40,6 +40,7 @@ export default {
       const linkPath = reservas.map((reserva) => ({
         ...reserva,
         linkPath: `/reserva/${reserva.id}`,
+        linkEdit: `/reserva/edit/${reserva.id}`,
       }));
       this.reservas = linkPath;
     },
