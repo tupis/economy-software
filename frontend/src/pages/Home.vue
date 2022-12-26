@@ -1,19 +1,22 @@
 <template>
   <div>
-    <div v-for="hotel in hotels" v-bind:key="hotel.id">
-      <router-link :to="hotel.linkPath"
-        ><p>{{ hotel.nome }}</p></router-link
-      >
-    </div>
+    <button>
+      <router-link to="/hotel/create/">Cadastrar hotel</router-link>
+    </button>
+    <ListHotel :hotels="hotels" />
   </div>
 </template>
 
 <script>
+import ListHotel from "../components/ListHotel/ListHotel.vue";
 import HotelServices from "../services/hotelServices";
 const { listAll } = HotelServices;
 
 export default {
-  name: "ListHotel",
+  name: "Home",
+  components: {
+    ListHotel,
+  },
   data() {
     return {
       hotels: [],
@@ -25,6 +28,7 @@ export default {
       this.hotels = data.map((hotel) => ({
         ...hotel,
         linkPath: `/hotel/${hotel.id}`,
+        linkEdit: `/hotel/edit/${hotel.id}`,
       }));
     },
   },
