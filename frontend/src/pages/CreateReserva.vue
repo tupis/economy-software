@@ -57,10 +57,10 @@
 </template>
 
 <script>
-import HotelServices from "../services/hotelServices";
+import ReservaServices from "../services/reservaServices";
 import router from "../router";
 import GoBackButton from "../components/GoBackButton/GoBackButton.vue";
-const { create } = HotelServices;
+const { create } = ReservaServices;
 
 export default {
   components: { GoBackButton },
@@ -87,11 +87,12 @@ export default {
         apartamento: this.apartamento,
         datacheckin: this.datacheckin,
         datacheckout: this.datacheckout,
-        status: this.status,
+        status: Number(this.status),
         hospedes: this.hospedes,
       };
       console.log(params);
-      //   const data = await create(params);
+      const data = await create(params);
+      console.log(data);
       this.setMessage("sucess");
     },
     getIdHotel() {
