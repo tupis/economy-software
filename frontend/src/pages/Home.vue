@@ -1,8 +1,10 @@
 <template>
   <div>
-    <button>
-      <router-link to="/hotel/create/">Cadastrar hotel</router-link>
-    </button>
+    <div class="create-reserva">
+      <v-btn variant="flat" color="info"
+        ><router-link to="/hotel/create/">Cadastrar Hotel</router-link></v-btn
+      >
+    </div>
     <ListHotel :hotels="hotels" />
   </div>
 </template>
@@ -37,3 +39,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.create-reserva {
+  margin: 20px auto;
+  width: fit-content;
+}
+.create-reserva a {
+  margin: auto;
+  color: white;
+  text-decoration: none;
+}
+</style>
