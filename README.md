@@ -42,41 +42,49 @@ $ cd backend
 $ yarn
 ```
 
-5. Execute a aplicação em modo de desenvolvimento
+5. Crie o arquivo que armazenará suas variáveis de ambiente
+
+```
+$ touch .env
+```
+
+6. Adicione variáveis e preenche-as corretamente como no exemplo em `.env.example`
+
+7. Execute a aplicação em modo de desenvolvimento
 
 ```
 $ yarn dev
 ```
 
-- **Obs**: O servidor inciará na porta: **3000** - acesse <http://localhost:3000>
+- **Obs**: O servidor inciará na porta: **3000** - acesse <http://localhost:5000>
 
 Agora vamos inicializar o client side.
 
-6. Saia da pasta do servidor
+8. Saia da pasta do servidor
 
 ```
 $ cd ../
 ```
 
-7. Entre na pasta do client side
+9. Entre na pasta do client side
 
 ```
 $ cd frontend/
 ```
 
-8. Instale as dependências
+10. Instale as dependências
 
 ```
 $ yarn
 ```
 
-9. Execute a aplicação em modo de desenvolvimento
+11. Execute a aplicação em modo de desenvolvimento
 
 ```
 $ yarn dev
 ```
 
-- **Obs**: O servidor inciará na porta: **5000** - acesse <http://localhost:5000>
+- **Obs**: O servidor inciará na porta: **5000** - acesse <http://localhost:5173>
 
 ## 📚 Funcionalidades
 
