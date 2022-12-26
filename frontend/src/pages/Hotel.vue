@@ -8,7 +8,7 @@
     <p>Cidade: {{ hotelInfo.cidade }}</p>
 
     <h1>Reservas:</h1>
-
+    <router-link :to="linkCreateReserva">Criar reserva</router-link>
     <ListReservas :reservas="reservas" />
   </div>
 </template>
@@ -27,6 +27,7 @@ export default {
     return {
       hotelInfo: {},
       reservas: [],
+      linkCreateReserva: "",
     };
   },
   methods: {
@@ -47,9 +48,14 @@ export default {
     getURL() {
       return this.$route.params.id;
     },
+    createReservaLink() {
+      const link = `/hotel/${this.getURL()}/reserva/create`;
+      this.linkCreateReserva = link;
+    },
   },
   mounted() {
     this.getInfoHotel();
+    this.createReservaLink();
   },
 };
 </script>
