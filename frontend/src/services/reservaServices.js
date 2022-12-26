@@ -19,7 +19,8 @@ const ReservaServices = {
   create: async (params) => {
     const response = await api
       .post("/cadastrarReservaHospede", params)
-      .then((res) => res.data);
+      .then((res) => res.data)
+      .catch((res) => res);
     return response;
   },
   update: async (id, params) => {
