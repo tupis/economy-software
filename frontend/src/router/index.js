@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Hotel from "../pages/Hotel.vue";
 import CreateHotel from "../pages/CreateHotel.vue";
 import EditHotel from "../pages/EditHotel.vue";
-// import CreateReserva from "../pages/CreateReserva.vue";
+import CreateReserva from "../pages/CreateReserva.vue";
 // import EditReserva from "../pages/EditReserva.vue";
 import Reserva from "../pages/Reserva.vue";
 import Home from "../pages/Home.vue";
@@ -16,7 +16,7 @@ const routes = [
   { path: "/hotel/edit/:id", component: EditHotel },
 
   { path: "/reserva/:id", component: Reserva },
-  // { path: "/reserva/create", component: CreateReserva },
+  { path: "/hotel/:id/reserva/create", component: CreateReserva },
   // { path: "/reserva/edit/:id", component: EditReserva },
 ];
 
