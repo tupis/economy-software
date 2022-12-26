@@ -14,6 +14,8 @@ dist-ssr
 
 dist/
 
+.vscode
+
 # Large media files
 *.mp4
 *.tiff
