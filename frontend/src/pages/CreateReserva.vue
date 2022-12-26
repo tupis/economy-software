@@ -30,7 +30,9 @@
 
       <v-text-field v-model="status" label="Status" required></v-text-field>
 
-      <button @click="addMoreHospede($event)">Adicionar mais um hóspede</button>
+      <v-btn @click="addMoreHospede($event)" color="info"
+        >Adicionar mais um hóspede</v-btn
+      >
       <div v-for="(hospede, index) in hospedes" v-bind:key="index">
         <h3>Hospede:</h3>
         <div class="wrapper-name">
@@ -44,6 +46,13 @@
             label="Sobrenome"
             required
           ></v-text-field>
+          <v-btn
+            variant="flat"
+            color="error"
+            @click="deleteHospede(index)"
+            class="delete-button"
+            >Excluir</v-btn
+          >
         </div>
       </div>
 
@@ -122,6 +131,9 @@ export default {
         sobrenome: "",
       });
     },
+    deleteHospede(index) {
+      this.hospedes.splice(index, 1);
+    },
   },
   mounted() {},
 };
@@ -141,5 +153,11 @@ export default {
 
 .wrapper-name {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-button {
+  margin: 0 10px;
 }
 </style>
