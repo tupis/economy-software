@@ -1,13 +1,29 @@
 <template>
-  <div>
+  <div class="container">
+    <v-card width="400" class="card">
+      <v-card-item>
+        <v-card-title
+          >Numero de reserva: {{ reserva.numeroreserva }}</v-card-title
+        >
+        <v-card-subtitle
+          >Numero de apartamento: {{ reserva.apartamento }}</v-card-subtitle
+        >
+      </v-card-item>
+
+      <v-card-text>
+        <p>Status: {{ reserva.status }}</p>
+        <p>Data de checkin: {{ reserva.datacheckin }}</p>
+        <p v-show="reserva.datacheckout">
+          Data de checkout: {{ reserva.datacheckout }}
+        </p>
+      </v-card-text>
+    </v-card>
+
+    <div class="create-reserva">
+      <GoBackButton />
+    </div>
+
     <div>
-      <p>Status: {{ reserva.status }}</p>
-      <p>Numero de reserva: {{ reserva.numeroreserva }}</p>
-      <p>Numero de apartamento: {{ reserva.apartamento }}</p>
-      <p>Data de checkin: {{ reserva.datacheckin }}</p>
-      <p v-show="reserva.datacheckout">
-        Data de checkout: {{ reserva.datacheckout }}
-      </p>
       <v-table fixed-header>
         <thead>
           <tr>
@@ -27,6 +43,9 @@
 </template>
 
 <script>
+import router from "../../router";
+import GoBackButton from "../GoBackButton/GoBackButton.vue";
+
 class Reserva {
   constructor(
     id,
@@ -36,7 +55,8 @@ class Reserva {
     datacheckin,
     datacheckout,
     status,
-    hospedes
+    hospedes,
+    linkEdit
   ) {
     this.status = status;
     this.numeroreserva = numeroreserva;
@@ -46,6 +66,7 @@ class Reserva {
     this.id = id;
     this.idhotel = idhotel;
     this.hospedes = hospedes;
+    this.linkEdit = linkEdit;
   }
 }
 
@@ -54,5 +75,30 @@ export default {
   props: {
     reserva: new Reserva(),
   },
+  components: { GoBackButton },
 };
 </script>
+
+<style scoped>
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card {
+  margin: auto;
+}
+.create-reserva {
+  margin: 20px auto;
+  width: fit-content;
+}
+.create-reserva a {
+  margin: auto;
+  color: white;
+  text-decoration: none;
+}
+
+.create-reserva button {
+  margin: 0 5px;
+}
+</style>
