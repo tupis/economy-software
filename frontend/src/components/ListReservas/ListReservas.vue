@@ -21,10 +21,14 @@
           <td v-else>Ainda não registrado</td>
           <td>
             <button>
-              <router-link :to="reserva.linkEdit">Editar</router-link>
+              <router-link :to="reserva.linkEdit"
+                ><v-icon icon="mdi-pencil"></v-icon
+              ></router-link>
             </button>
             <button>
-              <router-link :to="reserva.linkPath">Ver Mais</router-link>
+              <router-link :to="reserva.linkPath"
+                ><v-icon icon="mdi-eye"></v-icon
+              ></router-link>
             </button>
           </td>
         </tr>
@@ -46,5 +50,14 @@ export default {
 .container {
   max-width: 1200px;
   margin: auto;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a i {
+  margin: 0 2px;
 }
 </style>
