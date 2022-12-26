@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <v-alert type="success" v-show="sucess">Atualizado com sucesso</v-alert>
+    <v-alert type="success" v-show="sucess">Cadastrado com sucesso</v-alert>
 
-    <v-alert type="warning" v-show="error">Erro ao atualizar hotel</v-alert>
+    <v-alert type="warning" v-show="error">Erro ao cadastrar hotel</v-alert>
 
     <v-form ref="form">
       <v-text-field v-model="nome" label="Nome" required></v-text-field>
@@ -16,7 +16,7 @@
       <v-text-field v-model="cidade" label="Cidade" required></v-text-field>
 
       <div class="wrapper-buttons">
-        <v-btn color="success" @click="submit"> Atualizar hotel </v-btn>
+        <v-btn color="success" @click="submit"> Cadastrar </v-btn>
 
         <GoBackButton />
       </div>
@@ -28,7 +28,7 @@
 import HotelServices from "../services/hotelServices";
 import router from "../router";
 import GoBackButton from "../components/GoBackButton/GoBackButton.vue";
-const { update, search } = HotelServices;
+const { create } = HotelServices;
 
 export default {
   components: { GoBackButton },
@@ -50,7 +50,7 @@ export default {
         estado: this.estado,
         cidade: this.cidade,
       };
-      const data = await update(Number(this.getIdHotel()), params);
+      const data = await create(params);
       this.setMessage("sucess");
     },
     getIdHotel() {
