@@ -1,11 +1,12 @@
 import express from "express";
 import { ReservaController } from "../controllers/reserva";
+const { create, listAll, search, update } = ReservaController;
 
 const ReservaRouter = express.Router();
 
-ReservaRouter.post("/cadastrarReservaHospede", ReservaController.create);
-ReservaRouter.put("/atualizarReservaHospede", ReservaController.update);
-ReservaRouter.get("/buscarReservaHospede", ReservaController.listAll);
-ReservaRouter.get("/buscarReservaHospede/:id", ReservaController.list);
+ReservaRouter.post("/cadastrarReservaHospede", create);
+ReservaRouter.get("/buscarReservaHospede", listAll);
+ReservaRouter.put("/atualizarReservaHospede/:id", update);
+ReservaRouter.get("/buscarReservaHospede/:id", search);
 
 export default ReservaRouter;

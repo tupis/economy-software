@@ -1,32 +1,26 @@
 import { Request as req, Response as res } from "express";
 import prisma from "../utils/prisma";
 
-export const HotelController = {
+export const HospedeController = {
   listAll: async (req: req, res: res) => {
     try {
-      const allHotels = await prisma.tb_hotel.findMany();
+      const allHotels = await prisma.tb_hospedes.findMany();
 
       res.send(allHotels);
-    } catch (error) {
-      res.send("Erro ao listar todos os hotéis");
-    }
+    } catch (error) {}
   },
   search: async (req: req, res: res) => {
     const { id } = req.params;
+    if (id === undefined || id === null) {
+      throw new Error("Por favor insira um hospede válido");
+    }
 
     try {
-      const findHotel = await prisma.tb_hotel.findUnique({
+      const findHotel = await prisma.tb_hospedes.findUnique({
         where: {
           id: Number(id),
         },
-        include: {
-          reservas: true,
-        },
       });
-
-      if (findHotel === null) {
-        throw new Error();
-      }
 
       res.send(findHotel);
     } catch (error) {
@@ -34,17 +28,10 @@ export const HotelController = {
     }
   },
   create: async (req: req, res: res) => {
-    const { cidade, cnpj, estado, nome, pais, reservas } = req.body;
-
     try {
-      const newHotel = await prisma.tb_hotel.create({
+      const newHotel = await prisma.tb_hospedes.create({
         data: {
-          cidade,
-          cnpj,
-          estado,
-          nome,
-          pais,
-          reservas,
+          ...req.body,
         },
       });
 
@@ -55,27 +42,20 @@ export const HotelController = {
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
-    const { cidade, cnpj, estado, nome, pais, reservas } = req.body;
+    if (id === undefined || id === null) {
+      throw new Error("Por favor insira um hospede válido");
+    }
 
     try {
-      const updateHotel = await prisma.tb_hotel.update({
+      const updateHotel = await prisma.tb_hospedes.update({
         where: {
           id: Number(id),
         },
 
         data: {
-          cidade,
-          cnpj,
-          estado,
-          nome,
-          pais,
-          reservas,
+          ...req.body,
         },
       });
-
-      if (updateHotel === null) {
-        throw new Error();
-      }
 
       res.send(updateHotel);
     } catch (error) {

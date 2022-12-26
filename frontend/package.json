@@ -1,0 +1,28 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vite preview",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.1.96",
+    "axios": "^1.2.1",
+    "roboto-fontface": "*",
+    "uuid": "^9.0.0",
+    "vue": "^3.2.45",
+    "vue-router": "4",
+    "vuetify": "^3.0.0-beta.0",
+    "webfontloader": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.0.0",
+    "vite-plugin-vuetify": "^1.0.0-alpha.12",
+    "vue-cli-plugin-vuetify": "~2.5.8"
+  },
+  "type": "module"
+}

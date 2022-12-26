@@ -4,62 +4,121 @@ import prisma from "../utils/prisma";
 export const ReservaController = {
   listAll: async (req: req, res: res) => {
     try {
-      const allHotels = await prisma.tb_reservas.findMany();
+      const allReservas = await prisma.tb_reservas.findMany();
 
-      res.send(allHotels);
+      res.send(allReservas);
     } catch (error) {}
   },
-  list: async (req: req, res: res) => {
+  search: async (req: req, res: res) => {
     const { id } = req.params;
-    if (id === undefined || id === null) {
-      return;
-    }
 
     try {
-      const findHotel = await prisma.tb_reservas.findUnique({
+      const findReserva = await prisma.tb_reservas.findUnique({
         where: {
           id: Number(id),
         },
-      });
-
-      res.send(findHotel);
-    } catch (error) {
-      res.send("Erro ao achar o hotel");
-    }
-  },
-  create: async (req: req, res: res) => {
-    try {
-      const newHotel = await prisma.tb_reservas.create({
-        data: {
-          ...req.body,
+        include: {
+          hospedes: true,
         },
       });
 
-      res.send(newHotel);
+      if (findReserva === null) {
+        throw new Error();
+      }
+
+      res.send(findReserva);
     } catch (error) {
-      res.send("Erro ao criar hotel");
+      res.send("Erro ao achar o reserva");
+    }
+  },
+  create: async (req: req, res: res) => {
+    const {
+      apartamento,
+      datacheckin,
+      numeroreserva,
+      status,
+      datacheckout,
+      idhotel,
+    } = req.body;
+
+    let hospedes: Array<any> = [];
+
+    for await (let hospede of req.body.hospedes) {
+      hospedes.push({ nome: hospede.nome, sobrenome: hospede.sobrenome });
+    }
+
+    try {
+      const newReserva = await prisma.tb_reservas.create({
+        data: {
+          idhotel,
+          numeroreserva,
+          apartamento,
+          datacheckin,
+          datacheckout,
+          status,
+          hospedes: {
+            createMany: {
+              data: hospedes,
+            },
+          },
+        },
+        include: {
+          hospedes: true,
+        },
+      });
+
+      res.send(newReserva);
+    } catch (error) {
+      res.send("Erro ao criar reserva");
     }
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
-    if (id === undefined || id === null) {
-      return;
-    }
+    const { apartamento, datacheckin, datacheckout, numeroreserva, status } =
+      req.body;
 
+    let hospedes: Array<any> = [];
+
+    for await (let hospede of req.body.hospedes) {
+      hospedes.push({
+        where: {
+          id: hospede.id,
+        },
+        create: {
+          nome: hospede.nome,
+          sobrenome: hospede.sobrenome,
+        },
+        update: {
+          nome: hospede.nome,
+          sobrenome: hospede.sobrenome,
+        },
+      });
+    }
     try {
-      const updateHotel = await prisma.tb_reservas.update({
+      const updateReserva = await prisma.tb_reservas.update({
         where: {
           id: Number(id),
         },
 
         data: {
-          ...req.body,
+          apartamento,
+          datacheckin,
+          datacheckout,
+          numeroreserva,
+          status,
+          hospedes: {
+            upsert: hospedes,
+          },
         },
       });
 
-      res.send(updateHotel);
+      if (updateReserva === null) {
+        throw new Error();
+      }
+
+      res.send(updateReserva);
     } catch (error) {
-      res.send("Error ao atualizar hotel");
+      res.send("Error ao atualizar reserva");
     }
   },
 };

@@ -1,11 +1,12 @@
 import express from "express";
 import { HotelController } from "../controllers/hotel";
+const { create, listAll, search, update } = HotelController;
 
 const HotelRouter = express.Router();
 
-HotelRouter.post("/cadastrarHotel", HotelController.create);
-HotelRouter.put("/atualizarHotel", HotelController.update);
-HotelRouter.get("/buscarHotel/", HotelController.listAll);
-HotelRouter.get("/buscarHotel/:id", HotelController.list);
+HotelRouter.post("/cadastrarHotel", create);
+HotelRouter.get("/buscarHotel/", listAll);
+HotelRouter.put("/atualizarHotel/:id", update);
+HotelRouter.get("/buscarHotel/:id", search);
 
 export default HotelRouter;

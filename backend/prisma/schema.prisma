@@ -19,12 +19,12 @@ model tb_hotel {
 }
 
 model tb_reservas {
-  id            Int       @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   idhotel       Int?
   numeroreserva String
   apartamento   String
-  datacheckin   DateTime
-  datacheckout  DateTime?
+  datacheckin   String
+  datacheckout  String?
   status        Int
 
   hospedes tb_hospedes[]
@@ -32,7 +32,9 @@ model tb_reservas {
 }
 
 model tb_hospedes {
-  id            Int          @id @default(autoincrement())
+  id            String       @id @default(uuid())
+  nome          String
+  sobrenome     String
   tb_reservas   tb_reservas? @relation(fields: [tb_reservasId], references: [id])
   tb_reservasId Int?
 }
