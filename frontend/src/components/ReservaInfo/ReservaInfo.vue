@@ -8,6 +8,20 @@
       <p v-show="reserva.datacheckout">
         Data de checkout: {{ reserva.datacheckout }}
       </p>
+      <v-table fixed-header>
+        <thead>
+          <tr>
+            <th class="text-left">Nome</th>
+            <th class="text-left">Sobrenome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="hospede in reserva.hospedes" v-bind:key="hospede.id">
+            <td>{{ hospede.nome }}</td>
+            <td>{{ hospede.sobrenome }}</td>
+          </tr>
+        </tbody>
+      </v-table>
     </div>
   </div>
 </template>
