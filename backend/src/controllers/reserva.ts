@@ -74,21 +74,15 @@ export const ReservaController = {
   },
   update: async (req: req, res: res) => {
     const { id } = req.params;
-    const {
-      apartamento,
-      datacheckin,
-      datacheckout,
-      idhotel,
-      numeroreserva,
-      status,
-    } = req.body;
+    const { apartamento, datacheckin, datacheckout, numeroreserva, status } =
+      req.body;
 
     let hospedes: Array<any> = [];
 
     for await (let hospede of req.body.hospedes) {
       hospedes.push({
         where: {
-          id: hospede.idhospede,
+          id: hospede.id,
         },
         create: {
           nome: hospede.nome,
@@ -110,7 +104,6 @@ export const ReservaController = {
           apartamento,
           datacheckin,
           datacheckout,
-          idhotel,
           numeroreserva,
           status,
           hospedes: {
