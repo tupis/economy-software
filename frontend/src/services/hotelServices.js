@@ -24,7 +24,8 @@ const HotelServices = {
   },
   update: async (id, params) => {
     const response = await api
-      .update(`/atualizarHotel/${id}`, params)
+      .put(`/atualizarHotel/${id}`, params)
+      .then((res) => res.data)
       .catch((res) => res);
     return response;
   },

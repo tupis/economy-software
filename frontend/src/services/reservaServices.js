@@ -24,7 +24,8 @@ const ReservaServices = {
   },
   update: async (id, params) => {
     const response = await api
-      .update(`/atualizarReservaHospede/${id}`, params)
+      .put(`/atualizarReservaHospede/${id}`, params)
+      .then((res) => res.data)
       .catch((res) => res);
     return response;
   },
