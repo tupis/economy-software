@@ -18,7 +18,7 @@ export const HospedeController = {
     try {
       const findHotel = await prisma.tb_hospedes.findUnique({
         where: {
-          id: Number(id),
+          id: id,
         },
       });
 
@@ -49,7 +49,7 @@ export const HospedeController = {
     try {
       const updateHotel = await prisma.tb_hospedes.update({
         where: {
-          id: Number(id),
+          id: id,
         },
 
         data: {
